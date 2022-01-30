@@ -1,2 +1,2 @@
 # LeetCode-problems
-Collection of solutions of Leetcode problems I've Solved.
+Collection of solutions of Leetcode and GFG problems I've Solved.
