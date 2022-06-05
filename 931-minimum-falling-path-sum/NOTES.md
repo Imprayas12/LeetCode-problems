@@ -1,26 +1,30 @@
-**Iterative DFS (RECURSIVE APPROACH) TLE**
-​
-```
-class Solution {
-public int minFallingPathSum(int[][] matrix) {
-int ans = Integer.MAX_VALUE;
-for(int i=0;i<matrix.length;i++){
-ans = Math.min(ans,minPath(0,i,matrix));
+int[][] dp = new int[n][n];
+return minPath(matrix,dp);
 }
-return ans;
+private int minPath(int[][] arr,int[][] dp){
+int n = arr.length;
+for(int k=0;k<n;k++){
+dp[n-1][k] = arr[n-1][k];
 }
-private int minPath(int i,int j,int[][] arr){
-if(i==arr.length-1)
-return arr[i][j];
+for(int k=n-2;k>=0;k--){
+for(int l=n-1;l>=0;l--){
 int left = Integer.MAX_VALUE;
 int bottom = Integer.MAX_VALUE;
 int right = Integer.MAX_VALUE;
-if(j>0) left = arr[i][j]+ minPath(i+1,j-1,arr);
-bottom = arr[i][j] + minPath(i+1,j,arr);
-if(j<arr.length-1) right = arr[i][j] + minPath(i+1,j+1,arr);
-return Math.min(right,Math.min(left,bottom));
+if(l>0)
+left = arr[k][l]+ dp[k+1][l-1];
+bottom = arr[k][l] + dp[k+1][l];
+if(l<arr.length-1)
+right = arr[k][l] + dp[k+1][l+1];
+dp[k][l] = Math.min(right,Math.min(left,bottom));
+}
+}
+int ans = Integer.MAX_VALUE;
+for(int k=0;k<n;k++){
+ans = Math.min(ans,dp[0][k]);
+}
+return ans;
 }
 }
 ```
-​
 ​
