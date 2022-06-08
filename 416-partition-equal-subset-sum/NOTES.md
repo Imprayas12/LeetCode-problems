@@ -1,18 +1,5 @@
-return f(nums,n-1,sum/2);
-}
-private boolean f(int[] nums,int index,int target){
-if(target==0)
-return true;
-if(index==0)
-return nums[0]==target;
-boolean notTake = f(nums,index-1,target);
-boolean take = false;
-if(nums[index]<=target) take = f(nums,index-1,target-nums[index]);
-return take || notTake;
-}
-}
-```
 **Memoized (Accepted)**
+```
 class Solution {
 public boolean canPartition(int[] nums) {
 int n =nums.length;
@@ -39,3 +26,4 @@ return  take||notTake;
 }
 }
 ​
+```
