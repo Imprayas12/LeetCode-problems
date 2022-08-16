@@ -1,13 +1,12 @@
 class Solution {
     public int reverse(int x) {
-        long a = 0;
-        boolean flag = false;
-        if(x<0) flag=true;
-        while(x!=0){
-            a=a*10+x%10;
-            x/=10;
+        boolean neg = false;
+        if(x < 0) neg = true;
+        long reverse_num = 0;
+        while(x != 0) {
+            reverse_num = reverse_num * 10 + x % 10;
+            x /= 10;
         }
-        if(a>Integer.MAX_VALUE || a<Integer.MIN_VALUE) return 0;
-        return (int)a;
+        return reverse_num > Integer.MAX_VALUE || reverse_num < Integer.MIN_VALUE ? 0: (int) reverse_num;
     }
 }
