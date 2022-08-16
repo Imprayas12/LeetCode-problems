@@ -1,12 +1,12 @@
 class Solution {
     public boolean isPalindrome(int x) {
-        if(x < 0) return false;
-        int copy = x;
-        int sum = 0;
-        while(copy != 0){
-            sum = sum * 10 + copy % 10;
-            copy /= 10;
+       String number = String.valueOf(x);
+        int l = 0; 
+        int r = number.length() - 1;
+        while(l < r) {
+            if(number.charAt(l++) != number.charAt(r--))
+                return false;
         }
-        return sum == x;
+        return true;
     }
 }
