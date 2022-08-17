@@ -3,11 +3,11 @@ class Solution {
         String[] morses = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
         Set<String> set = new HashSet<>();
         for(int i = 0; i < words.length; i++){
-            String temp = "";
+            StringBuilder temp = new StringBuilder("");
             for(int j = 0; j < words[i].length();j++){
-                temp = temp.concat(morses[words[i].charAt(j) - 'a']);
+                temp.append(morses[words[i].charAt(j) - 'a']);
             }
-            set.add(temp);
+            set.add(temp.toString());
         }
         return set.size();
     }
