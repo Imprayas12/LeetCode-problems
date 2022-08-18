@@ -4,19 +4,20 @@ class Solution {
         for(int i = 0; i < arr.length; i++){
             map.put(arr[i],map.getOrDefault(arr[i],0) + 1);
         }
+        PriorityQueue<Integer> pq = new PriorityQueue(Collections.reverseOrder());
         int[] ar = new int[map.size()];
         int i = 0;
         for(Map.Entry<Integer,Integer> m: map.entrySet()) {
-            ar[i++] = m.getValue();
+            pq.add(m.getValue());
         }
-        Arrays.sort(ar);
         int sum = 0;
         int len = 0;
-        for(i = ar.length - 1; i>=0; i--){
-                sum += 1;
-                len += ar[i];
-            if(len >= arr.length/2) return sum; 
+        while(!pq.isEmpty()) {
+            sum += pq.poll();
+            len += 1;
+            if(sum >= arr.length/2) return len;
         }
-        return sum;
+        
+        return len;
     }
 }
