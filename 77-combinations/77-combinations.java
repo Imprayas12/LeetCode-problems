@@ -3,7 +3,7 @@ class Solution {
         Set<List<Integer>> set = new HashSet<>();
         int c = k;
         for(int i = 1; i <= n; i++){
-        recur(i,set,new HashSet<>(),k,n,c);
+        recur(i,set,new TreeSet<>(),k,n,c);
         }
         List<List<Integer>> ans = new ArrayList<>();
         for(var i: set) {
@@ -16,7 +16,6 @@ class Solution {
         if(k == 0) {
             if(cur.size() == c) {
             List<Integer> list = new ArrayList<>(cur);
-            Collections.sort(list);
             ans.add(list);
             }
             return;
