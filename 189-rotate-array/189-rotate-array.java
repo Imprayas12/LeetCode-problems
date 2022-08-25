@@ -3,8 +3,6 @@ class Solution {
      /*For array to rotate k times... the lowest element of the array must be at kth index after rotations.*/
         k %= nums.length;
         if(nums.length==0 || nums.length==1 || k == 0) return;
-        int[] newnum = new int[nums.length];
-        int j = 0;
         reverse(nums,0,nums.length - 1);
         reverse(nums,0, k - 1);
         reverse(nums,k ,nums.length - 1);
