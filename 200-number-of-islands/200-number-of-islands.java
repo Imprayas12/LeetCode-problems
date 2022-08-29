@@ -41,8 +41,7 @@ class Solution {
                     int rowC = r + dr;
                     int colD = c + dc;
                     if(rowC >= 0 && rowC < m && colD >= 0 && colD < n && grid[rowC][colD] == '1' && vis[rowC][colD] != 1){
-                        vis[rowC][colD] =  1;
-                        queue.add(new Pair(rowC,colD));
+                        bfs(rowC,colD,vis,grid);
                     }
                 }
             }
