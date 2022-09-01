@@ -2,23 +2,29 @@ import java.util.*;
 
 class Solution {
     public int search(int[] nums, int target) {
-        HashMap<Integer,Integer> hp = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            hp.put(nums[i],i);
+        if(nums.length == 1) return nums[0] == target ? 0 : -1;
+        int lo = 0,hi = nums.length -1;
+        while(lo < hi){
+            int mid = (lo + hi)/2;
+            if(nums[mid] > nums[hi]) lo = mid + 1;
+            else hi = mid;
         }
-        ArrayList<Integer> AR = new ArrayList<>();
-        for(int i=0;i<nums.length;i++) AR.add(nums[i]);
-        Collections.sort(AR);
-        for (int i = 0; i < nums.length; i++) nums[i] = AR.get(i);
-        int left = 0, right = nums.length - 1;
-        while (left <= right) {
-            int m = left + (right - left) / 2;
-            if (nums[m] == target)
-                return hp.get(nums[m]);
-            if (nums[m] < target)
-                left = m + 1;
-            else
-                right = m - 1;
+        int start = hi;
+        if(nums[start] <= target && target <= nums[nums.length - 1]) {
+            return binSearch(start,nums.length - 1,target,nums);
+        }
+        else {
+            return binSearch(0,start - 1,target,nums); 
+        }
+    }
+    private int binSearch(int lo,int hi,int target,int[] nums){
+        while(lo <= hi){
+            int mid = (lo + hi)/2;
+            if(nums[mid] == target)
+                return mid;
+            else if(nums[mid] > target)
+                hi = mid - 1;
+            else lo = mid + 1;
         }
         return -1;
     }
