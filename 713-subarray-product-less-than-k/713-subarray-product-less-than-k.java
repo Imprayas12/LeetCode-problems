@@ -7,8 +7,8 @@ class Solution {
         int res = 0;
         while(high < nums.length) {
             prod *= nums[high];
-            while(prod >= k && low < nums.length) prod /= nums[low++];
-            res += (high - low + 1) > 0 ? high - low + 1: 0;
+            while(prod >= k) prod /= nums[low++];
+            res += high - low + 1;
             high++;
         }
         return res;
