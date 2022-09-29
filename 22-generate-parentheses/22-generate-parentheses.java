@@ -10,14 +10,10 @@ class Solution {
             return;
         }       
         if(open_par < n) {
-            str += '(';
-            helper(ans,open_par + 1,close_par,n,str);
-            str = str.substring(0,str.length() - 1);
+            helper(ans,open_par + 1,close_par,n,str + '(');
         }   
         if(close_par < open_par) {
-            str += ')';
-            helper(ans,open_par,close_par + 1,n,str);
-            str = str.substring(0,str.length() - 1);
+            helper(ans,open_par,close_par + 1,n,str + ')');
         }
     }
 }
