@@ -18,7 +18,7 @@ class Solution {
         return ans;
     }
     private boolean isEnough(int weight,int[] weights,int daysAvailable) {
-        int daysReq = 1;
+        int daysRequired = 1;
         int i = 0;
         int currCap = 0;
         while(i < weights.length) {
@@ -28,9 +28,9 @@ class Solution {
             }
             else {
                 currCap = 0;
-                daysReq += 1;
+                daysRequired += 1;
             }
-            if(daysReq > daysAvailable) return false;
+            if(daysRequired > daysAvailable) return false;
         }
         return true;
     }
