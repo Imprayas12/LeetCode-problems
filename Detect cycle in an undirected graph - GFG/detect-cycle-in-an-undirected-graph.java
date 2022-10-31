@@ -44,12 +44,24 @@ class Solution {
         boolean[] vis = new boolean[V];
         for(int i = 0; i < adj.size(); i++) {
             if(!vis[i]) {
-                if(checkCycle(V,adj,vis,i)) return true;
+                if(dfs(i,-1,adj,vis)) return true;
             }
         }
         return false;
     }
-    private boolean checkCycle(int v,ArrayList<ArrayList<Integer>> adj,boolean[] vis,int src) {
+    private boolean dfs(int node,int parent,ArrayList<ArrayList<Integer>> adj,boolean[] vis) {
+        vis[node] = true;
+        for(var adjNode: adj.get(node)) {
+            if(!vis[adjNode]) {
+                if(dfs(adjNode,node,adj,vis) == true) return true;
+            }
+            else if(adjNode != parent){
+                return true;
+            }
+        }
+        return false;
+    }
+    private boolean checkCycle(ArrayList<ArrayList<Integer>> adj,boolean[] vis,int src) {
         Queue<Pair> queue = new LinkedList<>();
         vis[src] = true;
         queue.add(new Pair(src,-1));
