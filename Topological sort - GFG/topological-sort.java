@@ -64,19 +64,40 @@ class Solution
     static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) 
     {
         // add your code here
-        int[] vis = new int[V];
-        Stack<Integer> stack = new Stack<>();
-        for(int i = 0; i < V; i++) {
-            if(vis[i] == 0) {
-                dfs(vis,adj,i,V,stack);
+        // int[] vis = new int[V];
+        // Stack<Integer> stack = new Stack<>();
+        // for(int i = 0; i < V; i++) {
+        //     if(vis[i] == 0) {
+        //         dfs(vis,adj,i,V,stack);
+        //     }
+        // }
+        // int[] arr = new int[stack.size()];
+        // int k = 0;
+        // while(!stack.isEmpty()) {
+        //     arr[k++] = stack.pop();
+        // }
+        // return arr;
+        int[] inDegree = new int[V];
+        for(var i: adj) {
+            for(var j: i) {
+                inDegree[j]++;
             }
         }
-        int[] arr = new int[stack.size()];
-        int k = 0;
-        while(!stack.isEmpty()) {
-            arr[k++] = stack.pop();
+        Queue<Integer> queue = new ArrayDeque<>();
+        for(int i = 0; i < V; i++) {
+            if(inDegree[i] == 0) queue.add(i);
         }
-        return arr;
+        int[] topo = new int[V];
+        int k = 0;
+        while(!queue.isEmpty()) {
+            int node = queue.poll();
+            topo[k++] = node;
+            for(int i: adj.get(node)) {
+                inDegree[i]--;
+                if(inDegree[i] == 0) queue.add(i);
+            }
+        }
+        return topo;
     }
     private static void dfs(int[] vis,ArrayList<ArrayList<Integer>> adj,int node,int V,Stack<Integer> stack) {
         vis[node] = 1;
