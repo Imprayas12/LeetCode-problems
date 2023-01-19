@@ -14,15 +14,24 @@
  * }
  */
 class Solution {
+    public class Dia_Pair {
+        int height = -1;
+        int diameter = 0;
+    }
     public int diameterOfBinaryTree(TreeNode root) {
-        if(root == null) return 0;
-        int left = diameterOfBinaryTree(root.left);
-        int right = diameterOfBinaryTree(root.right);
-        int self_diameter = height(root.left) + height(root.right) + 2;
-        return Math.max(left,Math.max(right,self_diameter));
-    }
-    public int height(TreeNode root) {
-        if(root == null) return -1;
-        return Math.max(height(root.left),height(root.right)) + 1;
-    }
+            return diameter(root).diameter;
+        }
+        public Dia_Pair diameter(TreeNode root) {
+            if(root == null) {
+                return new Dia_Pair();
+            }
+            Dia_Pair left_dia_pair = diameter(root.left);
+            Dia_Pair right_dia_pair = diameter(root.right);
+            Dia_Pair self_dia_pair = new Dia_Pair();
+            int self_dia = left_dia_pair.height + right_dia_pair.height + 2;
+            self_dia_pair.diameter = 
+            Math.max(left_dia_pair.diameter,Math.max(right_dia_pair.diameter,self_dia));
+            self_dia_pair.height = Math.max(left_dia_pair.height,right_dia_pair.height) + 1;
+            return self_dia_pair;
+        }
 }
