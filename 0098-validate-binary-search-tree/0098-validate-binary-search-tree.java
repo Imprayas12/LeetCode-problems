@@ -1,11 +1,24 @@
-public class Solution {
+
+class BST_Pair {
+    boolean isBST = true;
+    long max = Long.MIN_VALUE;
+    long min = Long.MAX_VALUE;
+}
+
+
+class Solution {
     public boolean isValidBST(TreeNode root) {
-        return isValidBST(root, Long.MIN_VALUE, Long.MAX_VALUE);
+        return isValidBst(root).isBST;
     }
     
-    public boolean isValidBST(TreeNode root, long minVal, long maxVal) {
-        if (root == null) return true;
-        if (root.val >= maxVal || root.val <= minVal) return false;
-        return isValidBST(root.left, minVal, root.val) && isValidBST(root.right, root.val, maxVal);
+    public BST_Pair isValidBst(TreeNode root) {
+        if (root == null) return new BST_Pair();
+        BST_Pair left_bst_pair = isValidBst(root.left);
+        BST_Pair right_bst_pair = isValidBst(root.right);
+        BST_Pair self_bst_pair = new BST_Pair();
+        self_bst_pair.max = Math.max(left_bst_pair.max,Math.max(right_bst_pair.max,root.val));
+        self_bst_pair.min = Math.min(left_bst_pair.min,Math.min(right_bst_pair.min,root.val));
+        self_bst_pair.isBST = left_bst_pair.isBST && right_bst_pair.isBST && left_bst_pair.max < root.val && right_bst_pair.min > root.val;
+        return self_bst_pair;
     }
 }
