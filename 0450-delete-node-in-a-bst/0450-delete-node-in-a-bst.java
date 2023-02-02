@@ -19,9 +19,9 @@ class Solution {
         if(root.val == key) {
             if(root.left == null) return root.right;
             if(root.right == null) return root.left;
-            int minimum = min(root.right);
-            root.right = deleteNode(root.right, minimum);
-            root.val = minimum;
+            int maximum = max(root.left);
+            root.left = deleteNode(root.left, maximum);
+            root.val = maximum;
         }
         if(root.val < key) {
             root.right = deleteNode(root.right,key);
