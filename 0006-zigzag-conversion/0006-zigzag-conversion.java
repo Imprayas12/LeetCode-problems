@@ -1,7 +1,6 @@
 class Solution {
     public String convert(String s, int numRows) {
         if(numRows == 1) return s;
-        String ans = "";
         int n = s.length();
         int sections = (int) Math.ceil(n / (2 * numRows - 2.0));
         int numCols = sections * (numRows - 1);
@@ -23,11 +22,12 @@ class Solution {
                 col++;
             }
         }
+        StringBuilder sb = new StringBuilder("");
         for(char[] i: convert) {
             for(char j: i) {
-                if(j != ' ') ans += j;
+                if(j != ' ') sb.append(j);
             }
         }
-        return ans;
+        return sb.toString();
     }
 }
