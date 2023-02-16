@@ -20,9 +20,10 @@ class Solution {
         ListNode newNode = new ListNode(0);
         ListNode temp = newNode;
         while(!pq.isEmpty()) {
-            ListNode n = new ListNode(pq.poll().val);
-            temp.next = n;
+            // ListNode n = new ListNode(pq.poll().val);
+            temp.next = pq.poll();
             temp = temp.next;
+            temp.next = null;
         }
         return newNode.next;
     }
