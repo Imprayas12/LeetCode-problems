@@ -1,25 +1,38 @@
 class Solution {
-    int ans = -1;
+    
     public int longestCycle(int[] edges) {
-        boolean[] vis = new boolean[edges.length];
+        int[] indegree = new int[edges.length];
         for(int i = 0; i < edges.length; i++) {
+            if(edges[i] != -1) indegree[edges[i]] += 1;
+        }
+        boolean[] vis = new boolean[edges.length];
+        Queue<Integer> queue = new LinkedList<>();
+        for(int i = 0; i < edges.length; i++) {
+            if(indegree[i] == 0) queue.add(i);
+        }
+        while(!queue.isEmpty()) {
+            int node = queue.poll();
+            vis[node] = true;
+            int neighbour = edges[node];
+            if(neighbour != -1) {
+                indegree[neighbour] -= 1;
+                if(indegree[neighbour] == 0)
+                queue.add(neighbour);
+            }
+        }
+        int ans = -1;
+        for(int i = 0; i < vis.length; i++) {
             if(!vis[i]) {
-                Map<Integer,Integer> distance = new HashMap<>();
-                distance.put(i, 1);
-                dfs(i, distance, edges, vis);
+                int count = 1;
+                int neighbour = edges[i];
+                while(neighbour != i) {
+                    count += 1;
+                    vis[neighbour] = true;
+                    neighbour = edges[neighbour];
+                }
+                ans = Math.max(ans, count);
             }
         }
         return ans;
-    }
-    private void dfs(int node, Map<Integer, Integer> map, int[] edges, boolean[] vis){
-        vis[node] = true;
-        int neighbour = edges[node];
-        if(neighbour != -1 && !vis[neighbour]) {
-            map.put(neighbour, map.get(node) + 1);
-            dfs(neighbour, map, edges, vis);
-        }
-        else if(neighbour != -1 && map.containsKey(neighbour)) {
-            ans = Math.max(ans, map.get(node) - map.get(neighbour) + 1);
-        }
     }
 }
