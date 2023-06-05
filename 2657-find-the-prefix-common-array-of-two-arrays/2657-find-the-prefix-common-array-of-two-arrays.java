@@ -17,9 +17,12 @@ class Solution {
                 if(setA.contains(B[i]) && setB.contains(A[i])) {
                     ans[i] = ans[i - 1] + 2;
                 }
-                else if(setA.contains(B[i]) || setB.contains(A[i]))
+                else if(setA.contains(B[i]) || setB.contains(A[i])){
                     ans[i] = ans[i - 1] + 1;
-                else ans[i] = ans[i - 1];
+                } 
+                else {
+                    ans[i] = ans[i - 1];
+                } 
             }
         }
         return ans;
