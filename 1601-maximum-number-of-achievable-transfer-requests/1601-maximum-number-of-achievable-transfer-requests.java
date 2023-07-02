@@ -16,11 +16,11 @@ class Solution {
         }
         
         
-        indegree[requests[index][0]]--;
-        indegree[requests[index][1]]++;
-        helper(index + 1, count + 1, indegree,requests);
         indegree[requests[index][0]]++;
         indegree[requests[index][1]]--;
+        helper(index + 1, count + 1, indegree,requests);
+        indegree[requests[index][0]]--;
+        indegree[requests[index][1]]++;
         helper(index + 1, count, indegree, requests);
     }
 }
