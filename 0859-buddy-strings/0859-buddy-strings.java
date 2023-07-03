@@ -21,8 +21,7 @@ class Solution {
         if(indices.size() != 2) return false;
         int idx1 = indices.get(0);
         int idx2 = indices.get(1);
-        if(s.charAt(idx1) == goal.charAt(idx2) && s.charAt(idx2) == goal.charAt(idx1)) return true;
-        return false;
+        return s.charAt(idx1) == goal.charAt(idx2) && s.charAt(idx2) == goal.charAt(idx1);
         
     }
 }
