@@ -9,14 +9,16 @@
  *     }
  * }
  */
+
+/*  Floyd Cycle detection -> Hare and tortoise algorithm*/
 public class Solution {
     public boolean hasCycle(ListNode head) {
-        ListNode slow = head;
-        ListNode fast = head;
-        while(fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-            if(slow == fast) return true;
+        ListNode tortoise = head;
+        ListNode hare = head;
+        while(hare != null && hare.next != null) {
+            tortoise = tortoise.next;
+            hare = hare.next.next;
+            if(tortoise == hare) return true;
         }
         return false;
     }
